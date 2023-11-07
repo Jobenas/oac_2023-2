@@ -6,7 +6,10 @@ SOCK_BUFFER = 1024
 num_clientes = 0
 
 def client_handler(conn, client_address):
+    global num_clientes
     print(f"Cliente conectado desde {client_address[0]}:{client_address[1]}")
+    num_clientes += 1
+    print(f"Numero de clientes conectados: {num_clientes}")
 
     try:
         while True:
@@ -23,6 +26,7 @@ def client_handler(conn, client_address):
     finally:
         conn.close()
         print(f"Conexion con {client_address[0]}:{client_address[1]} cerrada")
+        num_clientes -= 1
 
 
 if __name__ == "__main__":
